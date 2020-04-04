@@ -1,6 +1,6 @@
 {
     "name": "cordova-res-generator",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "description": "Generates icon & splash screen for cordova/ionic projects using javascript only.",
     "main": "index.js",
     "preferGlobal": true,
@@ -9,7 +9,7 @@
         "cordova-res-generator": "./bin/cordova-res-generator"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node ./index.js"
     },
     "repository": {
         "type": "git",
@@ -36,13 +36,13 @@
     },
     "homepage": "https://github.com/olivab/cordova-res-generator",
     "dependencies": {
-        "bluebird": "^3.5.1",
-        "colors": "^1.1.2",
-        "commander": "^2.12.2",
-        "fs-extra": "^4.0.2",
-        "jimp": "^0.2.28",
-        "lodash": "^4.17.4",
-        "gauge": "^2.7.4"
+        "bluebird": "^3.7.2",
+        "colors": "^1.4.0",
+        "commander": "^5.0.0",
+        "fs-extra": "^9.0.0",
+        "jimp": "^0.10.0",
+        "lodash": "^4.17.15",
+        "gauge": "^3.0.0"
     },
     "contributors": [
         {

@@ -46,6 +46,7 @@ or
                                 (default: ./resources/)
     -I, --makeicon [optional]   option to process icon files only
     -S, --makesplash [optional] option to process splash files only
+    -m, --makedir [optional]    option to create the output directory
     -h, --help                  output usage information
 
 ---
