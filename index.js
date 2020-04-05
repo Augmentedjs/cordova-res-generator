@@ -14,7 +14,7 @@ const _ = require("lodash");
 const Gauge = require("gauge");
 const Themes = require("gauge/themes");
 const Color = require("console-control-strings").color
-const ourTheme = Themes.newTheme(themes({ hasUnicode: true, hasColor: true }), {
+const ourTheme = Themes.newTheme(Themes({ hasUnicode: true, hasColor: true }), {
   progressbarTheme: {
     preProgressbar: "⸨",
     postProgressbar: "⸩",
@@ -331,7 +331,7 @@ program
 .option("-I, --makeicon [optional]", "option to process icon files only")
 .option("-S, --makesplash [optional]", "option to process splash files only")
 .option("-m, --makedir [optional]", "option to create output dir")
-.option("-g, --genconfig [optional]", "option to generate a config")
+.option("-g, --generateconfig [optional]", "option to generate a config")
 .parse(process.argv);
 
 // app settings and default values
@@ -344,7 +344,7 @@ const g_settings = {
   makeicon: program.makeicon || (!program.makeicon && !program.makesplash) ? true : false,
   makesplash: program.makesplash || (!program.makeicon && !program.makesplash) ? true : false,
   makedir: program.makedir ? true : false,
-  generateConfig: program.generateConfig ? true : false
+  generateconfig: program.generateconfig ? true : false
 };
 
 // app entry point
@@ -354,7 +354,7 @@ console.log("cordova-res-generator " + (pjson.version).green);
 console.log("***************************".blue);
 
 const printConfig = (settings) => {
-  if (settings.generateConfig) {
+  if (settings.generateconfig) {
     display.header("Generating Config");
 
     const configs = [];

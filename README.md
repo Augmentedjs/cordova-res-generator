@@ -47,7 +47,7 @@ or
     -I, --makeicon [optional]   option to process icon files only
     -S, --makesplash [optional] option to process splash files only
     -m, --makedir [optional]    option to create the output directory
-    -g, --genconfig [optional]  option to generate a config
+    -g, --generateconfig [optional]  option to generate a config
     -h, --help                  output usage information
 
 ---
