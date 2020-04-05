@@ -1,72 +1,73 @@
 module.exports = {
-    platform: 'android',
-    type: 'icon',
-    path: 'android/icon/',
+    platform: "android",
+    type: "icon",
+    path: "android/icon/",
     definitions: [
         {
-            name: 'drawable-ldpi-icon.png',
+            name: "drawable-ldpi-icon.png",
             size: 36,
-            comment: 'ldpi'
+            comment: "ldpi"
         },
         {
-            name: 'drawable-mdpi-icon.png',
+            name: "drawable-mdpi-icon.png",
             size: 48,
-            comment: 'mdpi'
+            comment: "mdpi"
         },
         {
-            name: 'drawable-hdpi-icon.png',
+            name: "drawable-hdpi-icon.png",
             size: 72,
-            comment: 'hdpi'
+            comment: "hdpi"
         },
         {
-            name: 'drawable-xhdpi-icon.png',
+            name: "drawable-xhdpi-icon.png",
             size: 96,
-            comment: 'xhdpi'
+            comment: "xhdpi"
         },
         {
-            name: 'drawable-xxhdpi-icon.png',
+            name: "drawable-xxhdpi-icon.png",
             size: 144,
-            comment: 'xxhdpi'
+            comment: "xxhdpi"
         },
         {
-            name: 'drawable-xxxhdpi-icon.png',
+            name: "drawable-xxxhdpi-icon.png",
             size: 192,
-            comment: 'xxxhdpi'
+            comment: "xxxhdpi"
         },
         {
-            name: 'drawable-playstore-512-icon.png',
+            name: "drawable-playstore-512-icon.png",
             size: 512,
-            comment: 'Google Play Store'
+            comment: "Google Play Store",
+            ignore_config:true
         },
         {
-            name: 'mipmap-hdpi/ic_launcher.png',
+            name: "mipmap-hdpi/ic_launcher.png",
             size: 72,
-            comment: ''
+            comment: ""
         },
         {
-            name: 'mipmap-ldpi/ic_launcher.png',
+            name: "mipmap-ldpi/ic_launcher.png",
             size: 36,
-            comment: ''
+            comment: ""
         },
         {
-            name: 'mipmap-mdpi/ic_launcher.png',
+            name: "mipmap-mdpi/ic_launcher.png",
             size: 48,
-            comment: ''
+            comment: ""
         },
         {
-            name: 'mipmap-xhdpi/ic_launcher.png',
+            name: "mipmap-xhdpi/ic_launcher.png",
             size: 96,
-            comment: ''
+            comment: ""
         },
         {
-            name: 'mipmap-xxhdpi/ic_launcher.png',
+            name: "mipmap-xxhdpi/ic_launcher.png",
             size: 144,
-            comment: ''
+            comment: ""
         },
         {
-            name: 'mipmap-xxxhdpi/ic_launcher.png',
+            name: "mipmap-xxxhdpi/ic_launcher.png",
             size: 192,
-            comment: ''
+            comment: ""
         }
     ]
 };

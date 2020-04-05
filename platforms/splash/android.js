@@ -1,7 +1,7 @@
 module.exports = {
-    platform: 'android',
-    type: 'splash',
-    path: 'android/splash/',
+    platform: "android",
+    type: "splash",
+    path: "android/splash/",
     definitions: [{
             name: "drawable-land-hdpi-screen.png",
             width: 640,

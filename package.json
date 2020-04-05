@@ -13,28 +13,38 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/olivab/cordova-res-generator.git"
+        "url": "git://github.com/Augmentedjs/cordova-res-generator.git"
     },
     "keywords": [
-        "cordova",
-        "ionic",
-        "phonegap",
-        "icon",
-        "splash",
-        "splashscreen",
-        "generator",
-        "cli",
-        "tool"
+      "cordova",
+      "ionic",
+      "phonegap",
+      "icon",
+      "splash",
+      "splashscreen",
+      "generator",
+      "cli",
+      "tool"
     ],
     "author": {
         "name": "Olivab",
         "email": "olivabdev@gmail.com"
     },
+    "authors": [
+      {
+        "name": "Olivab",
+        "email": "olivabdev@gmail.com"
+      },
+      {
+        "name": "Bob Warren",
+        "email": "jedi.master@augmentedjs.com"
+      }
+    ],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/olivab/cordova-res-generator/issues"
+        "url": "https://github.com/Augmentedjs/cordova-res-generator/issues"
     },
-    "homepage": "https://github.com/olivab/cordova-res-generator",
+    "homepage": "https://github.com/Augmentedjs/cordova-res-generator",
     "dependencies": {
         "bluebird": "^3.7.2",
         "colors": "^1.4.0",
@@ -48,6 +58,10 @@
         {
             "name": "Olivab",
             "email": "olivabdev@gmail.com"
+        },
+        {
+          "name": "Bob Warren",
+          "email": "jedi.master@augmentedjs.com"
         }
     ],
     "devDependencies": {

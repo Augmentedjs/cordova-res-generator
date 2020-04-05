@@ -4,12 +4,6 @@ module.exports = {
   path: "ios/splash/",
   definitions: [
     {
-      name: 'drawable-playstore-512-icon.png',
-      size: 512,
-      comment: 'Google Play Store',
-      ignore_config:true
-    },
-    {
       name: "Default-568h@2x~iphone.png",
       width: 640,
       height: 1136,
@@ -103,7 +97,7 @@ module.exports = {
       name: "Default@2x~universal~anyany.png",
       width: 2732,
       height: 2732,
-      comment: ''
+      comment: ""
     } // Universal
   ]
 };

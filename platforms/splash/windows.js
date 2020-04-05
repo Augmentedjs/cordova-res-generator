@@ -1,11 +1,11 @@
 module.exports = {
     // https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/app-assets
-    platform: 'windows',
-    type: 'splash',
-    path: 'windows/splash/',
+    platform: "windows",
+    type: "splash",
+    path: "windows/splash/",
     definitions: [
         // Wide tile (Wide310x150Logo)
-        
+
         // 100% scale	310x150	Wide310x150Logo.scale-100.png
         {
             name: "Wide310x150Logo.scale-100.png",
@@ -43,7 +43,7 @@ module.exports = {
         },
 
         // Splash screen (SplashScreen)
-        
+
         // 100% scale	620x300	SplashScreen.scale-100.png
         {
             name: "SplashScreen.scale-100.png",
