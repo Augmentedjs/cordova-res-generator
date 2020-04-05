@@ -12,13 +12,9 @@ const path = require("path");
 const Jimp = require("jimp");
 const _ = require("lodash");
 const Gauge = require("gauge");
-
-const themes = require("gauge/themes");
-// fetch the default color unicode theme for this platform
-//const ourTheme = themes({hasUnicode: true, hasColor: true})
-
+const Themes = require("gauge/themes");
 const Color = require("console-control-strings").color
-const ourTheme = themes.newTheme(themes({ hasUnicode: true, hasColor: true }), {
+const ourTheme = Themes.newTheme(themes({ hasUnicode: true, hasColor: true }), {
   progressbarTheme: {
     preProgressbar: "⸨",
     postProgressbar: "⸩",
@@ -127,10 +123,10 @@ const getImages = (settings) => {
       const width = image.bitmap.width;
       const height = image.bitmap.height;
       if (width === ICON_WIDTH && width === height) {
-        display.success("Icon file ok (" + width + "x" + height + ")");
+        display.success(`Icon file ok (${width}x${height})`);
         defer.resolve(image);
       } else {
-        display.error("Bad icon file (" + width + "x" + height + ")");
+        display.error(`Bad icon file (${width}x${height})`);
         defer.reject("Bad image format");
       }
     })
@@ -150,10 +146,10 @@ const getImages = (settings) => {
       const width = image.bitmap.width;
       const height = image.bitmap.height;
       if (width === SPLASH_WIDTH && width === height) {
-        display.success("Splash file ok (" + width + "x" + height + ")");
+        display.success(`Splash file ok (${width}x${height})`);
         defer.resolve(image);
       } else {
-        display.error("Bad splash file (" + width + "x" + height + ")");
+        display.error(`Bad splash file (${width}x${height})`);
         defer.reject("Bad image format");
       }
     })
