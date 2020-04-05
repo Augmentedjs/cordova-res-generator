@@ -13,6 +13,26 @@ const Jimp = require("jimp");
 const _ = require("lodash");
 const Gauge = require("gauge");
 
+const themes = require("gauge/themes");
+// fetch the default color unicode theme for this platform
+//const ourTheme = themes({hasUnicode: true, hasColor: true})
+
+const Color = require("console-control-strings").color
+const ourTheme = themes.newTheme(themes({ hasUnicode: true, hasColor: true }), {
+  progressbarTheme: {
+    preProgressbar: "⸨",
+    postProgressbar: "⸩",
+    preComplete: Color("bgBlue", "brightBlue"),
+    complete: "⠂",
+    remaining: "░",
+    postComplete: Color("reset"),
+    preRemaining: Color("bgBrightBlack", "brightBlack"),
+    postRemaining: Color("reset")
+  },
+  activityIndicatorTheme: "⣾⣽⣻⢿⡿⣟⣯⣷",
+  preSubsection: "┉"
+});
+
 // helpers
 
 const display = {
@@ -25,11 +45,11 @@ const display = {
   },
   error: (str) => {
     str = " " + "✗".red + " " + str;
-    console.error(str);
+    console.error(str.red);
   },
   header: (str) => {
     console.log("");
-    console.log(str);
+    console.log(str.cyan);
   }
 };
 
@@ -83,9 +103,9 @@ const checkPlatforms = (settings) => {
 
   platforms.forEach(platform => {
     if (_.find(platformsKeys, (p) => platform === p)) {
-        platformsToProcess.push(platform);
+      platformsToProcess.push(platform);
     } else {
-        platformsUnknown.push(platform);
+      platformsUnknown.push(platform);
     }
   });
 
@@ -239,6 +259,7 @@ const generateForConfig = (imageObj, settings, config) => {
     let progressIndex = 0;
 
     const gauge = new Gauge();
+    gauge.setTheme(ourTheme);
     gauge.show(sectionName, 0);
 
     return Q.mapSeries(definitions, (def) => {
@@ -289,9 +310,6 @@ const generate = (imageObj, settings) => {
   return Q.mapSeries(filteredConfigs, (config) => {
     return generateForConfig(imageObj, settings, config);
   });
-  // .then(() => {
-    //display.success("Successfully generated all files");
-  // });
 };
 
 const catchErrors = (err) => {
@@ -317,6 +335,7 @@ program
 .option("-I, --makeicon [optional]", "option to process icon files only")
 .option("-S, --makesplash [optional]", "option to process splash files only")
 .option("-m, --makedir [optional]", "option to create output dir")
+.option("-g, --genconfig [optional]", "option to generate a config")
 .parse(process.argv);
 
 // app settings and default values
@@ -328,66 +347,69 @@ const g_settings = {
   outputdirectory: program.outputdir || path.join(".", "resources"),
   makeicon: program.makeicon || (!program.makeicon && !program.makesplash) ? true : false,
   makesplash: program.makesplash || (!program.makeicon && !program.makesplash) ? true : false,
-  makedir: program.makedir ? true : false
+  makedir: program.makedir ? true : false,
+  generateConfig: program.generateConfig ? true : false
 };
 
 // app entry point
 
-console.log("***************************");
-console.log("cordova-res-generator " + pjson.version);
-console.log("***************************");
+console.log("***************************".blue);
+console.log("cordova-res-generator " + (pjson.version).green);
+console.log("***************************".blue);
 
 const printConfig = (settings) => {
-  display.header("Generating files");
+  if (settings.generateConfig) {
+    display.header("Generating Config");
 
-  const configs = [];
+    const configs = [];
 
-  g_selectedPlatforms.forEach((platform) => {
-    PLATFORMS[platform].definitions.forEach((def) => configs.push(require(def)));
-  });
+    g_selectedPlatforms.forEach((platform) => {
+      PLATFORMS[platform].definitions.forEach((def) => configs.push(require(def)));
+    });
 
-  const configsByPlatform = {};
-  configs.forEach((config) => {
-    if (!configsByPlatform[config.platform]) {
-      configsByPlatform[config.platform] = [];
+    const configsByPlatform = {};
+    configs.forEach((config) => {
+      if (!configsByPlatform[config.platform]) {
+        configsByPlatform[config.platform] = [];
+      }
+      configsByPlatform[config.platform].push(config);
+    });
+    let platformName;
+    for (platformName in configsByPlatform) {
+      console.log(`<platform name="${platformName}">`);
+      configsByPlatform[platformName].forEach((config) => {
+        if (config.type == "icon" && settings.makeicon) {
+          config.definitions.forEach((def) => {
+            const path = `${settings.outputdirectory}/${config.path}${def.name}`;
+            let additionalProps = "";
+            if (platformName == "android"){
+              additionalProps = ` density="${def.comment}" `;
+            } else {
+              additionalProps = ` width="${def.size}" height="${def.size}" `;
+            }
+            if (!def.ignore_config){
+              console.log(`  <icon src="${path}" ${additionalProps}/>`);
+            }
+          });
+        }
+
+        if (config.type == "splash" && settings.makesplash) {
+          config.definitions.forEach((def) => {
+            const path = `${settings.outputdirectory}/${config.path}${def.name}`;
+            let additionalProps = "";
+            if (platformName == "android"){
+              additionalProps = ` density="${def.comment}" `;
+            } else {
+              additionalProps = ` width="${def.width}" height="${def.height}" `;
+            }
+            if (!def.ignore_config){
+              console.log(`  <splash src="${path}" ${additionalProps}/>`);
+            }
+          });
+        }
+      })
+      console.log(`</platform>`);
     }
-    configsByPlatform[config.platform].push(config);
-  });
-  let platformName;
-  for (platformName in configsByPlatform) {
-    console.log(`<platform name="${platformName}">`);
-    configsByPlatform[platformName].forEach((config) => {
-      if (config.type == "icon" && settings.makeicon) {
-        config.definitions.forEach((def) => {
-          const path = `${settings.outputdirectory}/${config.path}${def.name}`;
-          let additionalProps = "";
-          if (platformName == "android"){
-            additionalProps = ` density="${def.comment}" `;
-          } else {
-            additionalProps = ` width="${def.size}" height="${def.size}" `;
-          }
-          if (!def.ignore_config){
-            console.log(`<icon src="${path}" ${additionalProps}/>`);
-          }
-        });
-      }
-
-      if (config.type == "splash" && settings.makesplash) {
-        config.definitions.forEach((def) => {
-          const path = `${settings.outputdirectory}/${config.path}${def.name}`;
-          let additionalProps = "";
-          if (platformName == "android"){
-            additionalProps = ` density="${def.comment}" `;
-          } else {
-            additionalProps = ` width="${def.width}" height="${def.height}" `;
-          }
-          if (!def.ignore_config){
-            console.log(`<splash src="${path}" ${additionalProps}/>`);
-          }
-        });
-      }
-    })
-    console.log(`</platform>`);
   }
 };
 
