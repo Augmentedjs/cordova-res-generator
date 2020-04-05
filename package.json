@@ -49,5 +49,8 @@
             "name": "Olivab",
             "email": "olivabdev@gmail.com"
         }
-    ]
+    ],
+    "devDependencies": {
+        "object-assign": "^4.1.1"
+    }
 }

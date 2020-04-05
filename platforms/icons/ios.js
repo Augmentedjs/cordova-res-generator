@@ -1,8 +1,41 @@
 module.exports = {
     platform: 'ios',
     type: 'icon',
-    path: 'ios/icon',
-    definitions: [{
+    path: 'ios/icon/',
+    definitions: [
+        {
+            name: 'icon-20.png',
+            size: 20
+        },
+        {
+            name: 'icon-20@2x.png',
+            size: 40
+        },
+        {
+            name: 'icon-20@3x.png',
+            size: 60
+        },
+        {
+            name: 'icon-24@2x.png',
+            size: 48
+        },
+        {
+            name: 'icon-27.5@2x.png',
+            size: 55
+        },
+        {
+            name: 'icon-29.png',
+            size: 29
+        },
+        {
+            name: 'icon-29@2x.png',
+            size: 58
+        },
+        {
+            name: 'icon-29@3x.png',
+            size: 87
+        },
+        {
             name: 'icon.png',
             size: 57,
             comment: 'Default icon (avoid Apple submit error ITMS-90032)'

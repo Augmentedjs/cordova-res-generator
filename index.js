@@ -344,6 +344,71 @@ console.log("***************************");
 console.log("cordova-res-generator " + pjson.version);
 console.log("***************************");
 
+function printConfig(settings) {
+
+    display.header('Generating files');
+
+    var configs = [];
+
+    g_selectedPlatforms.forEach((platform) => {
+        PLATFORMS[platform].definitions.forEach((def) => configs.push(require(def)));
+    });
+
+    var filteredConfigs = _.filter(configs, (config) => {
+        if (config.type === 'icon' && settings.makeicon) {
+            return true;
+        }
+        if (config.type === 'splash' && settings.makesplash) {
+            return true;
+        }
+        return false;
+    });
+
+    var configsByPlatform = {};
+    configs.forEach((config) => {
+        if (!configsByPlatform[config.platform]) {
+            configsByPlatform[config.platform] = [];
+        }
+        configsByPlatform[config.platform].push(config);
+    });
+    for (var platformName in configsByPlatform) {
+        console.log(`<platform name="${platformName}">`);
+        configsByPlatform[platformName].forEach((config) => {
+            if (config.type == 'icon' && settings.makeicon) {
+                config.definitions.forEach((def) => {
+                    var path = `${settings.outputdirectory}/${config.path}${def.name}`;
+                    var additionalProps = "";
+                    if(platformName == 'android'){
+                        additionalProps = ` density="${def.comment}" `;
+                    }else{
+                        additionalProps = ` width="${def.size}" height="${def.size}" `;
+                    }
+                    if(!def.ignore_config){
+                        console.log(`<icon src="${path}" ${additionalProps}/>`);
+                    }
+                });
+            }
+
+            if (config.type == 'splash' && settings.makesplash) {
+                config.definitions.forEach((def) => {
+                    var path = `${settings.outputdirectory}/${config.path}${def.name}`;
+                    var additionalProps = "";
+                    if(platformName == 'android'){
+                        additionalProps = ` density="${def.comment}" `;
+                    }else{
+                        additionalProps = ` width="${def.width}" height="${def.height}" `;
+                    }
+                    if(!def.ignore_config){
+                        console.log(`<splash src="${path}" ${additionalProps}/>`);
+                    }
+                });
+            }
+        })
+        console.log(`</platform>`);
+    }
+};
+
 check(g_settings)
     .then(() => generate(g_imageObjects, g_settings))
+    .then(() => printConfig(g_settings))
     .catch((err) => catchErrors(err));

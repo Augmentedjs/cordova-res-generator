@@ -51,7 +51,7 @@ or
 
 ---
 
-## Do yourself a favour
+## Do yourself a favor
 
 Add to your package.json a script definition to match your file generation needs.
 This way, you won't have to type every now and again the whole command line with its options.
