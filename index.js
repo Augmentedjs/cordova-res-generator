@@ -230,14 +230,11 @@ const generateForConfig = (imageObj, settings, config) => {
   const transformSplash = (definition) => {
     const defer = Q.defer();
     const image = imageObj.splash.clone();
-    const x = (image.bitmap.width - definition.width) / 2;
-    const y = (image.bitmap.height - definition.height) / 2;
     const width = definition.width;
     const height = definition.height;
-
     const outputFilePath = path.join(platformPath, definition.name);
 
-    image.crop(x, y, width, height)
+    image.contain(width, height)
     .write(outputFilePath,
       (err) => {
         if (err) defer.reject(err);
@@ -250,7 +247,7 @@ const generateForConfig = (imageObj, settings, config) => {
   return fs.ensureDir(platformPath)
   .then(() => {
     const definitions = config.definitions;
-    const sectionName = "Generating " + config.type + " files for " + config.platform;
+    const sectionName = `Generating ${config.type} files for ${config.platform}`;
     const definitionCount = definitions.length;
     let progressIndex = 0;
 
