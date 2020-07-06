@@ -251,8 +251,11 @@ const generateForConfig = (imageObj, settings, config) => {
     const definitionCount = definitions.length;
     let progressIndex = 0;
 
-    const gauge = new Gauge();
-    gauge.setTheme(ourTheme);
+    const gauge = new Gauge(process.stderr, {
+    updateInterval: 50,
+    theme: ourTheme,
+    cleanupOnExit: false
+  });
     gauge.show(sectionName, 0);
 
     return Q.mapSeries(definitions, (def) => {
