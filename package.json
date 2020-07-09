@@ -1,6 +1,6 @@
 {
   "name": "@augmentedjs/cordova-res-generator",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Generates icon & splash screen for cordova/ionic projects using javascript only.",
   "main": "index.js",
   "preferGlobal": true,
@@ -52,8 +52,8 @@
     "console-control-strings": "^1.1.0",
     "fs-extra": "^9.0.1",
     "gauge": "^3.0.0",
-    "jimp": "^0.10.3",
-    "lodash": "^4.17.15"
+    "jimp": "^0.14.0",
+    "lodash": "^4.17.19"
   },
   "contributors": [
     {
